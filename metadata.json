@@ -1,0 +1,6 @@
+{
+  "name": "Matos Soluções Elétricas | Engenharia Elétrica & Automação",
+  "description": "Site institucional premium da Matos Soluções Elétricas. Instalações elétricas, automação residencial, energia solar e engenharia de alto padrão.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

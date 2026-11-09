@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #050505;
+    color: #F8FAFC;
+    overflow-x: hidden;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Atmospheric Lighting & Floating Animations */
+@keyframes float-hero-solar {
+  0%, 100% {
+    transform: translateY(0px) rotate(6deg) scale(1);
+  }
+  50% {
+    transform: translateY(-18px) rotate(8.5deg) scale(1.02);
+  }
+}
+
+@keyframes float-hero-bulb {
+  0%, 100% {
+    transform: translateY(0px) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-24px) rotate(-2deg);
+  }
+}
+
+@keyframes float-hero-breaker {
+  0%, 100% {
+    transform: translateY(0px) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(16px) rotate(-5.5deg);
+  }
+}
+
+@keyframes float-hero-plug {
+  0%, 100% {
+    transform: translateY(0px) rotate(10deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(13deg);
+  }
+}
+
+@keyframes pulse-lightning {
+  0%, 100% {
+    opacity: 0.4;
+    filter: drop-shadow(0 0 15px rgba(0, 160, 255, 0.4));
+  }
+  30% {
+    opacity: 0.9;
+    filter: drop-shadow(0 0 30px rgba(0, 220, 255, 0.9)) drop-shadow(0 0 60px rgba(0, 140, 255, 0.6));
+  }
+  60% {
+    opacity: 0.5;
+    filter: drop-shadow(0 0 20px rgba(0, 180, 255, 0.5));
+  }
+}
+
+@keyframes scanline {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+.animate-float-solar {
+  animation: float-hero-solar 7s ease-in-out infinite;
+}
+
+.animate-float-bulb {
+  animation: float-hero-bulb 6s ease-in-out infinite;
+}
+
+.animate-float-breaker {
+  animation: float-hero-breaker 8s ease-in-out infinite;
+}
+
+.animate-float-plug {
+  animation: float-hero-plug 6.5s ease-in-out infinite;
+}
+
+.animate-pulse-lightning {
+  animation: pulse-lightning 4s ease-in-out infinite;
+}
+
+/* Custom horizontal scroll bar concealment */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Architectural backdrop blur panels */
+.arch-panel {
+  background: rgba(14, 14, 16, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.arch-panel-hover:hover {
+  border-color: rgba(0, 163, 255, 0.4);
+  box-shadow: 0 20px 40px -15px rgba(0, 140, 255, 0.15);
+}
