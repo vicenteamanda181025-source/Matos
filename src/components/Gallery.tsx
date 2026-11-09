@@ -14,11 +14,27 @@ import {
 import { INITIAL_GALLERY_DATA } from '../data/initialData';
 import { GalleryItem } from '../types';
 
+const cleanImageUrl = (url: string) => {
+  if (!url) return '';
+  if (url.startsWith('/src/assets/images/')) {
+    return url.replace('/src/assets/images/', '/images/');
+  }
+  return url;
+};
+
 export const Gallery: React.FC = () => {
   const [items, setItems] = useState<GalleryItem[]>(() => {
     try {
       const saved = localStorage.getItem('matos_gallery_items');
-      if (saved) return JSON.parse(saved);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed.map((item: GalleryItem) => ({
+            ...item,
+            imageUrl: cleanImageUrl(item.imageUrl),
+          }));
+        }
+      }
     } catch (e) {
       console.error(e);
     }
@@ -200,11 +216,19 @@ export const Gallery: React.FC = () => {
             {/* Cinematic Big Image */}
             <div className="aspect-[16/10] w-full overflow-hidden bg-black relative">
               <img
-                src={item.imageUrl}
+                src={cleanImageUrl(item.imageUrl)}
                 alt={item.title}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-108"
                 referrerPolicy="no-referrer"
                 loading="lazy"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (target.src.includes('/src/assets/images/')) {
+                    target.src = target.src.replace('/src/assets/images/', '/images/');
+                  } else {
+                    target.src = '/public/assets/aistudio/IMG_6280_65ce4fe8.jpeg';
+                  }
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A0C10] via-black/30 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
 
@@ -252,10 +276,18 @@ export const Gallery: React.FC = () => {
           >
             <div className="relative aspect-[16/10] bg-black">
               <img
-                src={selectedItem.imageUrl}
+                src={cleanImageUrl(selectedItem.imageUrl)}
                 alt={selectedItem.title}
                 className="w-full h-full object-contain"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (target.src.includes('/src/assets/images/')) {
+                    target.src = target.src.replace('/src/assets/images/', '/images/');
+                  } else {
+                    target.src = '/public/assets/aistudio/IMG_6280_65ce4fe8.jpeg';
+                  }
+                }}
               />
               <button
                 onClick={() => setSelectedItem(null)}
@@ -428,9 +460,17 @@ export const Gallery: React.FC = () => {
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <img
-                        src={item.imageUrl}
+                        src={cleanImageUrl(item.imageUrl)}
                         alt={item.title}
                         className="w-10 h-10 object-cover rounded-lg bg-black"
+                        onError={(e) => {
+                          const target = e.currentTarget;
+                          if (target.src.includes('/src/assets/images/')) {
+                            target.src = target.src.replace('/src/assets/images/', '/images/');
+                          } else {
+                            target.src = '/public/assets/aistudio/IMG_6280_65ce4fe8.jpeg';
+                          }
+                        }}
                       />
                       <div className="min-w-0">
                         <p className="text-xs font-semibold text-white truncate">{item.title}</p>

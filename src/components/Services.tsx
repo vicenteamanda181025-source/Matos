@@ -73,6 +73,15 @@ export const Services: React.FC<ServicesProps> = ({ onOpenQuote }) => {
                 key={activeService.id}
                 className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  // If path starts with /src/assets/images/, fallback to /images/
+                  if (target.src.includes('/src/assets/images/')) {
+                    target.src = target.src.replace('/src/assets/images/', '/images/');
+                  } else {
+                    target.src = '/public/assets/aistudio/IMG_6280_65ce4fe8.jpeg';
+                  }
+                }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               

@@ -93,10 +93,17 @@ export const FloatingEquipment: React.FC = () => {
       >
         <div className="relative rounded-[22px] overflow-hidden aspect-[16/10] bg-[#0E1015]">
           <img
-            src="/src/assets/images/hero_modern_house_solar_1794236269411.jpg"
+            src="/images/hero_modern_house_solar.jpg"
             alt="Residência contemporânea com energia solar fotovoltaica e iluminação de alto padrão"
             className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-1000"
             referrerPolicy="no-referrer"
+            onError={(e) => {
+              // Fallback to timestamp path or asset path if needed
+              const target = e.currentTarget;
+              if (target.src.indexOf('hero_modern_house_solar_') === -1) {
+                target.src = '/public/assets/aistudio/IMG_6280_65ce4fe8.jpeg';
+              }
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/90 via-[#050505]/20 to-transparent" />
           

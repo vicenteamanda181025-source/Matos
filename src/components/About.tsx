@@ -33,10 +33,16 @@ export const About: React.FC<AboutProps> = ({ onOpenQuote }) => {
             <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-cyan-500/20 via-white/[0.04] to-transparent p-[1px] shadow-[0_25px_60px_rgba(0,0,0,0.9)]">
               <div className="relative rounded-[23px] overflow-hidden aspect-[4/3] bg-[#0E1015]">
                 <img
-                  src="/src/assets/images/about_electrician_panel_1794236270109.jpg"
+                  src="/images/about_electrician_panel.jpg"
                   alt="Engenheiro elétrico da Matos Soluções Elétricas inspecionando quadro de distribuição técnica"
                   className="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
                   referrerPolicy="no-referrer"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (target.src.indexOf('about_electrician_panel_') === -1) {
+                      target.src = '/public/assets/aistudio/IMG_6280_65ce4fe8.jpeg';
+                    }
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 
